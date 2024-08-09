@@ -6,3 +6,38 @@ class Contact(models.Model):
     email = models.EmailField()
     subject = models.TextField()
     message = models.TextField()
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=111)
+
+    def __str__(self):
+
+        return self.title
+
+
+
+class Hashtag(models.Model):
+    title = models.CharField(max_length=111)
+
+    def __str__(self):
+
+        return self.title
+
+
+class Publication(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category',null=True)
+    hashtags = models.ManyToManyField(Hashtag,  null=True)
+    short_description = models.TextField()
+    description = models.TextField()
+    title = models.CharField(max_length=111)
+    img = models.ImageField()
+    data = models.DateField(null=True)
+    is_activ = models.BooleanField(null=True)
+
+
+
+
+
+
+

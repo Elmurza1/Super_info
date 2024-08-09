@@ -17,11 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from info.views import HomeView, PublicationView, ContactView, client_message
+from django.conf.urls.static import static
+from django.conf.urls.static import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view()),
     path('contact/', ContactView.as_view(), name='contact-list'),
-    path('publication_detail', PublicationView.as_view()),
+    path('publication/<int:pk>', PublicationView.as_view(), name='publication-list'),
     path('contact/client-create-contact/', client_message)
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

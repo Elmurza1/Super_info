@@ -58,27 +58,21 @@ https://templatemo.com/tm-553-xtra-blog
                 <div class="col-lg-8 tm-post-col">
                     <div class="tm-post-full">                    
                         <div class="mb-4">
-                            <h2 class="pt-2 tm-color-primary tm-post-title">Single Post of Super Info HTML Template</h2>
-                            <p class="tm-mb-40">Education</p>
-                            <p class="tm-mb-40">June 16, 2020</p>
+                            <h2 class="pt-2 tm-color-primary tm-post-title">{{publication.title}}</h2>
+                            <p class="tm-mb-40">{{publication.category.title}}</p>
+                            <p class="tm-mb-40">publication.data</p>
 
-                            <img src="{% static 'img/img-01.jpg' %}" alt="Image" class="img-fluid">
+                            <img src="{{ publication.img.url}}" alt="Image" class="img-fluid">
 
                             <p>
-                                This is a description of the video post. You can also have an image instead of
-                                the video. You can free download 
-                                from TemplateMo website. Phasellus maximus quis est sit amet maximus. Vestibulum vel rutrum
-                                lorem, ac sodales augue. Aliquam erat volutpat. Duis lectus orci, blandit in arcu
-                                est, elementum tincidunt lectus. Praesent vel justo tempor, varius lacus a,
-                        pharetra lacus. </p>
+                                {{publication.short_description}} </p>
                             <p>
-                                Duis pretium efficitur nunc. Mauris vehicula nibh nisi. Curabitur gravida neque
-                                dignissim, aliquet nulla sed, condimentum nulla. Pellentesque id venenatis
-                                quam, id cursus velit. Fusce semper tortor ac metus iaculis varius. Praesent
-                                aliquam ex vel lectus ornare tristique. Nunc et eros quis enim feugiat tincidunt
-                                et vitae dui.
+                                {{publication.description}}
                             </p>
-                            <span class="d-block text-right tm-color-primary">Hashtags: #Creative  #Design #Business</span>
+                             <span class="d-block text-right tm-color-primary">hastag:</span>
+                            {%for item in publication.hashtags.all%}
+                            <span class="d-block text-right tm-color-primary"> {{item.title}}</span>
+                            {%endfor%}
                         </div>
                         
                         <!-- Comments -->
@@ -99,20 +93,7 @@ https://templatemo.com/tm-553-xtra-blog
                                 </div>
                                 <span class="d-block text-right tm-color-primary">May 15, 2020</span>
                             </div>
-                            <div class="tm-comment-reply tm-mb-45">
-                                <hr>
-                                <div class="tm-comment">
-                                    <figure class="tm-comment-figure">
-                                        <figcaption class="tm-color-primary text-center">Jewel Soft</figcaption>
-                                    </figure>
-                                    <p>
-                                        Nunc et eros quis enim feugiat tincidunt et vitae dui.
-                                        Nullam consectetur justo ac ex laoreet rhoncus. Nunc
-                                        id leo pretium, faucibus sapien vel, euismod turpis.
-                                    </p>
-                                </div>                                
-                                <span class="d-block text-right tm-color-primary">June 21, 2020</span>
-                            </div>
+
                             <form action="" class="mb-5 tm-comment-form">
                                 <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
                                 <div class="mb-4">
