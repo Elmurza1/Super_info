@@ -81,20 +81,22 @@ https://templatemo.com/tm-553-xtra-blog
                             <hr class="tm-hr-primary tm-mb-45">
                              <div class="tm-comment-reply tm-mb-45">
                                 <hr>
+                                   {% for item in publication_list.comments.all%}
                                 <div class="tm-comment">
+
                                     <figure class="tm-comment-figure">
-                                        <figcaption class="tm-color-primary text-center">Mark Sonny</figcaption>
+                                        <figcaption class="tm-color-primary text-center">{{item.name}}</figcaption>
                                     </figure>
                                     <p>
-                                        Nunc et eros quis enim feugiat tincidunt et vitae dui.
-                                        Nullam consectetur justo ac ex laoreet rhoncus. Nunc
-                                        id leo pretium, faucibus sapien vel, euismod turpis.
+                                       {{item.text}}
                                     </p>
                                 </div>
-                                <span class="d-block text-right tm-color-primary">May 15, 2020</span>
+                                <span class="d-block text-right tm-color-primary">{{item.created_at}}</span>
+                                 {%endfor%}
                             </div>
 
-                            <form action="" class="mb-5 tm-comment-form">
+                            <form method="POST" action="{% url 'comment-url' pk=publication.pk %}" class="mb-5 tm-comment-form">
+                                {%csrf_token%}
                                 <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
                                 <div class="mb-4">
                                     <input class="form-control" name="name" type="text" placeholder="Your name">

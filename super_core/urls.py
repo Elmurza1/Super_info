@@ -16,15 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from info.views import HomeView, PublicationView, ContactView, client_message
+from info.views import PublicationView, ContactView, client_message, SearchView, HomeView, PublicationCommentView
 from django.conf.urls.static import static
 from django.conf.urls.static import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view()),
+    path('home/', SearchView.as_view(), name='search-home-url'),
     path('contact/', ContactView.as_view(), name='contact-list'),
     path('publication/<int:pk>', PublicationView.as_view(), name='publication-list'),
-    path('contact/client-create-contact/', client_message)
+    path('contact/client-create-contact/', client_message),
+    path('publication/<int:pk>/comment/',PublicationCommentView.as_view(), name='comment-url' )
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

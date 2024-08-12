@@ -36,6 +36,13 @@ class Publication(models.Model):
     is_activ = models.BooleanField(null=True)
 
 
+class PublicationComment(models.Model):
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE, related_name='comments')
+    text = models.TextField()
+    name = models.CharField(max_length=111)
+    created_at = models.DateField(auto_now=True)
+
+
 
 
 

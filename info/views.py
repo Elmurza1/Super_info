@@ -1,10 +1,11 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
-from .models import Contact, Publication
+from django.views.generic import TemplateView, View
+from .models import Contact, Publication, PublicationComment
 
 
 # Create your views here.
-class HomeView(TemplateView):
+class HomeView(TemplateView): #TODO:
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         context = {
@@ -13,8 +14,27 @@ class HomeView(TemplateView):
         }
         return context
 
+class SearchView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        search_word = self.request.GET['query']
+        context = {
+
+            'publication_list': Publication.objects.filter(
+
+                Q(title__icontains=search_word) |Q(description__icontainc=search_word)
+
+            )
+        }
+        return context
+
+
+
 class ContactView(TemplateView):
     template_name = 'contact.html'
+
+
 
 class PublicationView(TemplateView):
     template_name = 'publication-detail.html'
@@ -28,6 +48,8 @@ class PublicationView(TemplateView):
         }
         return context
 
+
+
 def client_message(request):
     print(request.POST)
 
@@ -40,5 +62,20 @@ def client_message(request):
     Contact.objects.create(name=name, email=email, subject=subject, message=message)
 
     return redirect('contact-list')
+
+
+class PublicationCommentView(View):
+
+    def post(self, request, *args, **kwargs):
+        comment_pk = kwargs['pk']
+        publication = Publication.objects.get(id=comment_pk)
+
+        input_name = request.POST['name']
+        input_text = request.POST['message']
+
+        PublicationComment.objects.create(publication=publication,name=input_name, text=input_text)
+
+        return redirect('publication-list' ,pk=comment_pk)
+
 
 
