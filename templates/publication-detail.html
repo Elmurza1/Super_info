@@ -29,7 +29,7 @@ https://templatemo.com/tm-553-xtra-blog
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
-                    <li class="tm-nav-item"><a href="index.html" class="tm-nav-link">
+                    <li class="tm-nav-item"><a href="{%url 'home-list' %}" class="tm-nav-link">
                         <i class="fas fa-home"></i>
                         Blog Home
                     </a></li>
@@ -81,7 +81,7 @@ https://templatemo.com/tm-553-xtra-blog
                             <hr class="tm-hr-primary tm-mb-45">
                              <div class="tm-comment-reply tm-mb-45">
                                 <hr>
-                                   {% for item in publication_list.comments.all%}
+                                 {% for item in publication.comments.all%}
                                 <div class="tm-comment">
 
                                     <figure class="tm-comment-figure">
@@ -91,9 +91,8 @@ https://templatemo.com/tm-553-xtra-blog
                                        {{item.text}}
                                     </p>
                                 </div>
-                                <span class="d-block text-right tm-color-primary">{{item.created_at}}</span>
-                                 {%endfor%}
-                            </div>
+                                <span class="d-block text-right tm-color-primary">{{item.date}}</span>
+                                  {%endfor%}
 
                             <form method="POST" action="{% url 'comment-url' pk=publication.pk %}" class="mb-5 tm-comment-form">
                                 {%csrf_token%}

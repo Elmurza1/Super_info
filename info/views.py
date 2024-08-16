@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
@@ -5,11 +6,15 @@ from .models import Contact, Publication, PublicationComment
 
 
 # Create your views here.
-class HomeView(TemplateView): #TODO:
+class HomeView(TemplateView): #TODO:   se&
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
+        publication_list = Publication.objects.all()
+        paginator = Paginator(publication_list, 2)
+        page_number = self.request.GET['page']
+        page_obj = paginator.get_page(page_number)
         context = {
-            'publication_list': Publication.objects.all(),
+            'page_obj': page_obj,
             'activ': Publication.objects.filter(is_activ=True)
         }
         return context
@@ -21,9 +26,9 @@ class SearchView(TemplateView):
         search_word = self.request.GET['query']
         context = {
 
-            'publication_list': Publication.objects.filter(
+            'publication_list': Publication.objects.filter(is_activ=True).filter(
 
-                Q(title__icontains=search_word) |Q(description__icontainc=search_word)
+                Q(title__icontains=search_word) |Q(description__icontains=search_word)
 
             )
         }
