@@ -6,33 +6,43 @@ from .models import Contact, Publication, PublicationComment
 
 
 # Create your views here.
-class HomeView(TemplateView): #TODO:   se&
+class HomeView(TemplateView):
     template_name = 'index.html'
+
     def get_context_data(self, **kwargs):
-        publication_list = Publication.objects.all()
+        search_word = self.request.GET.get('query', '')  # Обеспечить, чтобы search_word не был None
+
+        # Получение списка публикаций на основе поиска, если query предоставлен
+        publication_list = Publication.objects.filter(is_activ=True).filter(
+            Q(title__icontains=search_word) | Q(description__icontains=search_word)
+        )
+
+        # Пагинация
         paginator = Paginator(publication_list, 2)
-        page_number = self.request.GET['page']
+        page_number = self.request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
+
         context = {
             'page_obj': page_obj,
-            'activ': Publication.objects.filter(is_activ=True)
+            'search_word': search_word,  # Передача значения поиска в контексте
+            'activ': Publication.objects.filter(is_activ=True)  # Список активных публикаций
         }
         return context
 
-class SearchView(TemplateView):
-    template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        search_word = self.request.GET['query']
-        context = {
-
-            'publication_list': Publication.objects.filter(is_activ=True).filter(
-
-                Q(title__icontains=search_word) |Q(description__icontains=search_word)
-
-            )
-        }
-        return context
+# class SearchView(TemplateView):
+#     template_name = 'index.html'
+#
+#     def get_context_data(self, **kwargs):
+#         search_word = self.request.GET['query']
+#         context = {
+#
+#             'publication_list': Publication.objects.filter(is_activ=True).filter(
+#
+#                 Q(title__icontains=search_word) | Q(description__icontains=search_word)
+#
+#             )
+#         }
+#         return context
 
 
 
@@ -57,15 +67,12 @@ class PublicationView(TemplateView):
 
 def client_message(request):
     print(request.POST)
-
-
-    name = request.POST['name']
-    email = request.POST['email']
-    subject = request.POST['subject']
-    message = request.POST['message']
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    subject = request.POST.get('subject')
+    message = request.POST.get('message')
 
     Contact.objects.create(name=name, email=email, subject=subject, message=message)
-
     return redirect('contact-list')
 
 
@@ -80,7 +87,7 @@ class PublicationCommentView(View):
 
         PublicationComment.objects.create(publication=publication,name=input_name, text=input_text)
 
-        return redirect('publication-list' ,pk=comment_pk)
+        return redirect('publication-detail',pk=comment_pk)
 
 
 
