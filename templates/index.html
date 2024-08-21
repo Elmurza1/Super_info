@@ -32,11 +32,11 @@ https://templatemo.com/tm-553-xtra-blog
                 <ul>
                     <li class="tm-nav-item active"><a href="{%url 'home-list' %}" class="tm-nav-link">
                         <i class="fas fa-home"></i>
-                        Blog Home
+                        {% trans 'Blog Home'%}
                     </a></li>
                     <li class="tm-nav-item"><a href="{%url 'contact-list' %}" class="tm-nav-link">
                         <i class="far fa-comments"></i>
-                        Contact Us
+                        {% trans 'Contact Us'%}
                     </a></li>
                 </ul>
             </nav>
@@ -63,7 +63,7 @@ https://templatemo.com/tm-553-xtra-blog
                         <div class="tm-post-link-inner">
                             <img src="{{item.img.url}}" alt="Image" class="img-fluid">
                         </div>
-                        <span class="position-absolute tm-new-badge">New</span>
+                        <span class="position-absolute tm-new-badge">{% trans 'New'%}</span>
                         <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{item.title}}</h2>
                     </a>                    
                     <p class="tm-pt-30">
@@ -77,7 +77,7 @@ https://templatemo.com/tm-553-xtra-blog
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
-                        <span>{{item.comments.count}} comments</span>
+                        <span>{{item.comments.count}} {% trans 'comments'%}</span>
                     </div>
 
                 </article>
@@ -86,10 +86,10 @@ https://templatemo.com/tm-553-xtra-blog
             <div class="row tm-row tm-mt-100 tm-mb-75">
                 <div class="tm-prev-next-wrapper">
                     {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number}}" class="mb-2 tm-btn tm-btn-primary tm-prev-next  tm-mr-20">Prev</a>
+                    <a href="?page={{ page_obj.previous_page_number}}" class="mb-2 tm-btn tm-btn-primary tm-prev-next  tm-mr-20">{% trans 'Prev</a>
                     {%endif%}
                     {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number}}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+                    <a href="?page={{ page_obj.next_page_number}}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">{% trans 'Next</a>
                     {%endif%}
                 </div>
                 <div class="tm-paging-wrapper">

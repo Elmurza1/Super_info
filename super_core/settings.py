@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -117,9 +117,15 @@ USE_TZ = True
 gettext = lambda s: s
 
 LANGUAGES = (
-    ('ru' ,gettext('Russian')),
-    ('kg', gettext('Kyrgyz')),
+    ('ky', gettext('Kyrguz')),
+    ('ru', gettext('Russian')),
+
 )
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -132,4 +138,4 @@ STATICFILES_DIRS = [BASE_DIR / 'assets']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-U
+
