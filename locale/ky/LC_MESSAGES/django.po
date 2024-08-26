@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-21 19:16+0600\n"
+"POT-Creation-Date: 2024-08-26 18:06+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Super Info"
 msgstr "супер инфо"
 
-#: .\templates\index.html:35
+#: .\templates\index.html:35 .\templates\publication-detail.html:34
 msgid "Blog Home"
 msgstr "башкы бет"
 

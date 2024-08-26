@@ -31,6 +31,6 @@ path('home/', HomeView.as_view(), name='home-list'),
      path('contact/', ContactView.as_view(), name='contact-list-url'),
      path('publication/<int:pk>', PublicationView.as_view(), name='publication-detail'),
      path('contact/client-create-contact/', client_message , name='contact-list'),
-     path('publication/<int:pk>/comment/',PublicationCommentView.as_view(), name='comment-url' )
+     path('publication/<int:pk>/comment/', PublicationCommentView.as_view(), name='comment-url' )
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
