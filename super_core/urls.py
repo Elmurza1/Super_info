@@ -26,7 +26,7 @@ urlpatterns = [
     path('i18/', include('django.conf.urls.i18n')),
 ]
 urlpatterns +=i18n_patterns(
-path('home/', HomeView.as_view(), name='home-list'),
+path('', HomeView.as_view(), name='home-list'),
 #    path('home/search/', SearchView.as_view(), name='search-home-url'),
      path('contact/', ContactView.as_view(), name='contact-list-url'),
      path('publication/<int:pk>', PublicationView.as_view(), name='publication-detail'),
