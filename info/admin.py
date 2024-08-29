@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Publication, Category, Hashtag
+from .models import Contact, Publication, Category, Hashtag, PublicationComment
 
 
 # Register your models here.
@@ -27,3 +27,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class HashtagAdmin(admin.ModelAdmin):
     list_display = ['title']
 
+@admin.register(PublicationComment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name']
